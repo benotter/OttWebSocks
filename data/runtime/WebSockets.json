@@ -1,0 +1,115 @@
+{
+"About":
+        {"Name": "WebSockets",
+                "Author": "Ben Otter",
+                "Copyright": "Copyright (C) 2014 Benjamin McLean",
+                "Comment": "A Basic WebSockets Object",
+                "URL": "",
+                "Help": "",
+                "Identifier": "OTWS"
+                },
+        "ActionMenu":[
+                [0, "Open New WebSocket"]
+                "Separator"
+                [1, "Send Message over WebSocket"]
+                "Separator"
+                [2, "Close WebSocket Connection"]
+                "Separator"
+        ]
+
+        "ConditionMenu":[
+                [0, "New Message on WebSocket?"]
+                "Separator"
+                [1, "Is WebSocket Connected?"]
+                "Separator"
+                [2, "Error on WebSocket"]
+                "Separator"
+        ]
+
+        "ExpressionMenu":[
+                [0, "Get Message on WebSocket"]
+                "Separator"
+                [1, "Get Error on WebSocket"]
+        ]
+
+        "Actions":[
+
+        { "Title": "Open WebSocket %0 on port %2 to address %1"
+
+                "Parameters":
+                [
+                        ["Text", "WebSocket Name"]
+                        ["Text", "Address Ex:\'www.example.com\'"]
+                        ["Integer", "Port"]
+                ]
+        }
+
+        { "Title": "Send message %1 on WebSocket %0"
+
+                "Parameters":
+                [
+                        ["Text", "WebSocket Name"]
+                        ["Text", "Message to send"]
+                ]
+        }
+
+        { "Title": "Close WebSocket %0"
+
+                "Parameters":
+                [
+                        ["Text", "Name of WebSocket to Close"]
+                ]
+        }
+        ]
+
+        "Conditions":[
+
+        { "Title": "New Message on WebSocket %0"
+                "Triggered": true
+
+                "Parameters":
+                [
+                        ["Text", "Name of WebSocket"]
+                ]
+        }
+
+        { "Title": "WebSocket %0 has Connected"
+                "Triggered": true
+
+                "Parameters":
+                [
+                        ["Text", "Name of WebSocket"]
+                ]
+        }
+
+        { "Title": "Error on WebSocket %0"
+                "Triggered": true
+
+                "Parameters":
+                [
+                        ["Text", "Name of WebSocket"]
+                ]
+        }
+        ]
+
+        "Expressions":[
+
+        { "Title": "Message("
+                "Returns": "Text"
+
+                "Parameters":
+                [
+                        ["Text", "WebSocket Name"]
+                ]
+        }
+
+        { "Title": "Error("
+                "Returns": "Text"
+
+                "Parameters":
+                [
+                        ["Text", "WebSocket Name"]
+                ]
+        }
+        ]
+        }
