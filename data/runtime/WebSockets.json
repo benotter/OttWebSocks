@@ -1,131 +1,115 @@
-"About":
 {
-	"Name": "WebSockets"
-	"Author": "Ben Otter"
-	"Copyright": "Copyright (C) 2014 Benjamin McLean"
-	"Comment": "A Basic WebSockets Object"
-	"URL": ""
-	"Help": ""
+"About":
+        {"Name": "WebSockets",
+                "Author": "Ben Otter",
+                "Copyright": "Copyright (C) 2014 Benjamin McLean",
+                "Comment": "A Basic WebSockets Object",
+                "URL": "",
+                "Help": "",
+                "Identifier": "OTWS"
+                },
+        "ActionMenu":[
+                [0, "Open New WebSocket"]
+                "Separator"
+                [1, "Send Message over WebSocket"]
+                "Separator"
+                [2, "Close WebSocket Connection"]
+                "Separator"
+        ]
 
-	// Four letters ONLY, to identify your extension. Remember to change this!
-	"Identifier": "OTWS"
-}
+        "ConditionMenu":[
+                [0, "New Message on WebSocket?"]
+                "Separator"
+                [1, "Is WebSocket Connected?"]
+                "Separator"
+                [2, "Error on WebSocket"]
+                "Separator"
+        ]
 
-"ActionMenu":
-[
-	[0, "Open New WebSocket"]
-	"Separator"
-	[1, "Send Message over WebSocket"]
-	"Separator"
-	[2, "Close WebSocket Connection"]
-]
+        "ExpressionMenu":[
+                [0, "Get Message on WebSocket"]
+                "Separator"
+                [1, "Get Error on WebSocket"]
+        ]
 
-"ConditionMenu":
-[
-	[0, "New Message on WebSocket?"]
-	"Separator"
-	[1, "Is WebSocket Connected?"]
-	"Separator"
-	[2, "Error on WekSocket"]
-]
+        "Actions":[
 
-"ExpressionMenu":
-[
-	[0, "Get Message on WebSocket"]
-	[1, "Get Error on WebSocket"]
-]
+        { "Title": "Open WebSocket %0 on port %2 to address %1"
 
-"Actions":
-[
-	// 0
-	// You can use %0 to %F for the different parameters
+                "Parameters":
+                [
+                        ["Text", "WebSocket Name"]
+                        ["Text", "Address Ex:\'www.example.com\'"]
+                        ["Integer", "Port"]
+                ]
+        }
 
-	{ "Title": "Open WebSocket %1 on port %2 with name %0"
+        { "Title": "Send message %1 on WebSocket %0"
 
-	  "Parameters": 
-	  [
-		  ["Text", "Give WebSocket a unique Name"]
-		  ["Text", "WebSocket Address. Ex:\'www.example.com\'"]
-		  ["Integer", "What port to open WebSocket on"]
-	  ]
-	}
+                "Parameters":
+                [
+                        ["Text", "WebSocket Name"]
+                        ["Text", "Message to send"]
+                ]
+        }
 
-	// 1
+        { "Title": "Close WebSocket %0"
 
-	{ "Title": "Send message %1 on WebSocket %0"
-		
-		"Parameters":
-		[
-			["Text", "WebSocket Name"]
-			["Text", "Message to send"]
-		]
-	}
+                "Parameters":
+                [
+                        ["Text", "Name of WebSocket to Close"]
+                ]
+        }
+        ]
 
-	{ "Title": "Close WebSocket %0"
-		
-		"Parameters":
-		[
-			["Text", "Name of WebSocket to Close"]
-		]
-	}
-]
+        "Conditions":[
 
-"Conditions":
-[
-	// 0
+        { "Title": "New Message on WebSocket %0"
+                "Triggered": true
 
-	// The %o thing shows the icon of the object - you should always prefix your condition titles with that
-	// Triggered = red condition or not
+                "Parameters":
+                [
+                        ["Text", "Name of WebSocket"]
+                ]
+        }
 
-	{ "Title": "New Message on %0"
-	  "Triggered": true
+        { "Title": "WebSocket %0 has Connected"
+                "Triggered": true
 
-	  "Parameters": 
-	  [
-		  ["Text", "Name of WebSocket"]
-	  ]
-	}
-	
-	{ "Title": "WebSocket %0 has Connected"
-	  "Triggered": true
+                "Parameters":
+                [
+                        ["Text", "Name of WebSocket"]
+                ]
+        }
 
-	  "Parameters":
-	  [
-		  ["Text", "Name of WebSocket"]
-	  ]
-	}
-	
-	{ "Title": "Error on %0"
-	  "Triggered": true
+        { "Title": "Error on WebSocket %0"
+                "Triggered": true
 
-	  "Parameters": 
-	  [
-		  ["Text", "Name of WebSocket"]
-	  ]
-	}
-]
+                "Parameters":
+                [
+                        ["Text", "Name of WebSocket"]
+                ]
+        }
+        ]
 
-"Expressions":
-[
-	// 0
+        "Expressions":[
 
-	{ "Title": "Message("
-	  "Returns": "Text"
+        { "Title": "Message("
+                "Returns": "Text"
 
-	  "Parameters": 
-	  [
-		  ["Text", "WebSocket Name"]
-	  ]
-	}
+                "Parameters":
+                [
+                        ["Text", "WebSocket Name"]
+                ]
+        }
 
-	// 1
+        { "Title": "Error("
+                "Returns": "Text"
 
-	{ "Title": "Error("
-	  "Returns": "Text"
-	  
-	  "Parameters":
-	  [
-		["Text", "WebSocket Name"]
-	  ]
-	}
-]
+                "Parameters":
+                [
+                        ["Text", "WebSocket Name"]
+                ]
+        }
+        ]
+        }
