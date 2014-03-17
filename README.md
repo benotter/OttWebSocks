@@ -16,8 +16,8 @@ around line 125,
 
 Then FIRST BACKUP and open 'Extensions.js', then add the lines:
 
-    	if (this.name == "Box2DJoint")
-    	    return new CRunBox2DJoint();
+    	if (this.name == "WebSockets")
+    	    return new CRunWebSockets();
 
 around line 225.
 
