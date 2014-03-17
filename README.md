@@ -10,7 +10,7 @@ Then navigate to 'Data/Runtime/Html5/'
 
 Then FIRST BACKUP and open 'RuntimeDev.js', then add the line:
 
-document.write('<script src="' + document.srcPath + 'WebSockets.js"></script>');
+        document.write('<script src="' + document.srcPath + 'WebSockets.js"></script>');
 
 around line 125,
 
