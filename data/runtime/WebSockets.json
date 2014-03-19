@@ -1,13 +1,12 @@
-{
 "About":
-        {"Name": "WebSockets",
-                "Author": "Ben Otter",
-                "Copyright": "Copyright (C) 2014 Benjamin McLean",
-                "Comment": "A Basic WebSockets Object",
-                "URL": "",
-                "Help": "",
-                "Identifier": "OTWS"
-                },
+{"Name": "WebSockets",
+        "Author": "Ben Otter",
+        "Copyright": "Copyright (C) 2014 Benjamin McLean",
+        "Comment": "A Basic WebSockets Object",
+        "URL": "",
+        "Help": "",
+        "Identifier": "OTWS"
+},
         "ActionMenu":[
                 [0, "Open New WebSocket"]
                 "Separator"
@@ -24,12 +23,16 @@
                 "Separator"
                 [2, "Error on WebSocket"]
                 "Separator"
+                [3, "WebSocket has Closed"]
         ]
 
         "ExpressionMenu":[
                 [0, "Get Message on WebSocket"]
                 "Separator"
                 [1, "Get Error on WebSocket"]
+                "Separator"
+                [2, "Get Reason for Close"]
+                "Separator"
         ]
 
         "Actions":[
@@ -90,6 +93,16 @@
                         ["Text", "Name of WebSocket"]
                 ]
         }
+        
+        { "Title": "WebSocker %0 has closed %1"
+                "Triggered": true
+
+                "Parameters":
+                [
+                        ["Text", "Name of WebSocket"]
+                        ["Text", "Socket close status; 'clean' or 'dirty'"]
+                ]
+        }
         ]
 
         "Expressions":[
@@ -111,5 +124,14 @@
                         ["Text", "WebSocket Name"]
                 ]
         }
-        ]
+
+        { "Title": "CloseRes("
+                "Returns": "Text"
+
+                "Parameters":
+                [
+                        ["Text", "WebSocket Name"]
+                ]
         }
+        ]
+
