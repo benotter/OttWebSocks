@@ -1,7 +1,8 @@
 CRunWebSockets.CND_NEWMESSAGE = 0;
 CRunWebSockets.CND_ISCONNECTED = 1;
 CRunWebSockets.CND_ONERROR = 2;
-CRunWebSockets.CND_LAST = 3;
+CRunWebSockets.CND_ONCLOSE = 3;
+CRunWebSockets.CND_LAST = 4;
 
 CRunWebSockets.ACT_OPENSOCKET = 0;
 CRunWebSockets.ACT_SENDMESSAGE = 1;
@@ -9,6 +10,7 @@ CRunWebSockets.ACT_CLOSE = 2;
 
 CRunWebSockets.EXP_GETMESSAGE = 0;
 CRunWebSockets.EXP_GETERROR = 1;
+CRunWebSockets.EXP_GETCLOSERES = 2;
 
 function CRunWebSockets()
 {
@@ -58,6 +60,26 @@ CRunWebSockets.prototype = CServices.extend(new CRunExtension(), {
                 }
 
                 return false;
+                
+            case CRunWebSockets.CND_ONCLOSE:
+
+                var name = cnd.getParamExpString(this.rh, 0);
+                var stat = this.messages[name].closed;
+                var wasclean = cnd.getParamExpString(this.rh, 1);
+
+                wasclean = wasclean === "clean" || wasclean === "dirty" ? wasclean : 'clean';
+                
+                if (wasclean === 'clean' && this.messages[name].closeclean === true && stat === true) {
+                    this.messages[name].closed = false;
+                    return true;
+                }
+                
+                if (wasclean === 'dirty' && this.messages[name].closeclean === false && stat === true) {
+                    this.messages[name].closed = false;
+                    return true;
+                }
+                
+                return false;
         }
         return false;
     },
@@ -94,6 +116,13 @@ CRunWebSockets.prototype = CServices.extend(new CRunExtension(), {
                         that.messages[name].message = event.data;
                         that.messages[name].newmsg = true;
                         that.ho.generateEvent(CRunWebSockets.CND_NEWMESSAGE, 0);
+                    };
+
+                    this.messages[name].ws.onclose = function(event) {
+                        that.messages[name].closed = true;
+                        that.messages[name].closeres = event.reason;
+                        that.messages[name].closeclean = event.wasClean;
+                        that.ho.generateEvent(CRunWebSockets.CND_ONCLOSE, 0);
                     };
 
                 } catch (err) {
@@ -144,6 +173,10 @@ CRunWebSockets.prototype = CServices.extend(new CRunExtension(), {
             case CRunWebSockets.EXP_GETERROR:
                 var name = this.ho.getExpParam();
                 return this.errors[name].message;
+  
+            case CRunWebSockets.EXP_GETERROR:
+                var name = this.ho.getExpParam();
+                return this.errors[name].closeres;
         }
         return 0;
     }
